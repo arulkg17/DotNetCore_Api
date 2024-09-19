@@ -5,6 +5,7 @@ C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\B
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BOL\obj\Debug\net8.0\BOL.AssemblyInfoInputs.cache
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BOL\obj\Debug\net8.0\BOL.AssemblyInfo.cs
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BOL\obj\Debug\net8.0\BOL.csproj.CoreCompileInputs.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BOL\obj\Debug\net8.0\BOL.sourcelink.json
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BOL\obj\Debug\net8.0\BOL.dll
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BOL\obj\Debug\net8.0\refint\BOL.dll
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BOL\obj\Debug\net8.0\BOL.pdb

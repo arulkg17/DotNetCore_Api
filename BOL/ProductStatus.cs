@@ -10,6 +10,8 @@ namespace BOL
     {
         Created,
         Updated,
-        Deleted
+        Deleted,
+        PendingDeletion,
+        Active
     }
 }

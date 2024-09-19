@@ -52,6 +52,18 @@ namespace DAL
                         .OrderBy(a => a.RequestDate)
                         .ToListAsync();
 
+                //var approvalQueue = await _context.ApprovalQueues
+                //                    .Include(aq => aq.Product) // Include product details
+                //                    .OrderBy(aq => aq.RequestDate) // Order by oldest first
+                //                    .Select(aq => new ApprovalQueueDto
+                //                    {
+                //                        ProductName = aq.Product.Name,          
+                //                        RequestReason = aq.Reason.ToString(),   
+                //                        RequestDate = aq.RequestDate            
+                //                    })
+                //                    .ToListAsync();
+
+                //return approvalQueue;
             }
             catch (Exception ex)
             {
@@ -59,52 +71,44 @@ namespace DAL
                 throw ex;
             }
         }
-        public async Task<int> ApproveProduct(int approvalId)
+        public async Task<string> ApproveProduct(int approvalId, bool isApproved)
         {
-            int retVal = 0;
+            string retVal = string.Empty;
 
             try
             {
                 var approval = await _context.ApprovalQueues.FindAsync(approvalId);
-                if (approval == null)
-                {
-                    throw new Exception("Approval request not found");
-                }
+                if (approval == null) return "Approval request not found";
+                
                 var product = await _context.Products.FindAsync(approval.ProductId);
-
-                if (product != null)
+                if (product == null) return "Product not found";
+                if (isApproved)
                 {
-                    product.Status = approval.Reason switch
+                    switch (approval.Reason)
                     {
-                        ApprovalReason.PriceAboveLimit => ProductStatus.Created,
-                        ApprovalReason.PriceIncreaseAboveThreshold => ProductStatus.Updated,
-                        ApprovalReason.ProductDeletion => ProductStatus.Deleted
-                    };
+                        case ApprovalReason.PriceAboveLimit:
+                        case ApprovalReason.PriceIncreaseAboveThreshold:
+                            product.Status = ProductStatus.Updated;
+                            product.IsActive = true;
+                            retVal = "Product approved successfully";
+                            break;
+                        case ApprovalReason.ProductDeletion:
+                            product.IsActive = false;
+                            retVal = "Product rejected successfully";
+                            break;
+                        default:
+                            retVal = "Unknown approval reason.";
+                            break;
+                    }
 
-                    //switch (approval.Reason)
-                    //{
-                    //    case ApprovalReason.PriceAboveLimit:
-
-                    //        product.Status = ProductStatus.Created;
-                    //        break;
-
-                    //    case ApprovalReason.PriceIncreaseAboveThreshold:
-                    //        product.Status = ProductStatus.Updated;
-                    //        break;
-
-                    //    case ApprovalReason.ProductDeletion:
-
-                    //        product.Status = ProductStatus.Deleted;
-                    //        break;
-                    //    default:
-                    //        product.Status = ProductStatus.Created;
-                    //        break;
-                    //}
+                    _context.ApprovalQueues.Remove(approval);
+                    await _context.SaveChangesAsync();
                 }
-                _context.Products.Update(product);
-                _context.ApprovalQueues.Remove(approval);
-                await _context.SaveChangesAsync();
-                retVal = 1;
+                else
+                {
+                    approval.RequestDate = DateTime.UtcNow;  
+                    await _context.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {

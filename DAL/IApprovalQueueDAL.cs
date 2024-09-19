@@ -11,7 +11,7 @@ namespace DAL
     {
        Task<int> AddApprovalQueue(ProductObj productObj, ApprovalReason reason);
         Task<List<ApprovalQueueObj>> GetApprovalQueues();
-        Task<int> ApproveProduct(int approvalId);
+        Task<string> ApproveProduct(int approvalId, bool isApproved);
 
     }
 }

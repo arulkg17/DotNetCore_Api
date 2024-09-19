@@ -37,12 +37,12 @@ namespace DotNetCore_WebAPI.Controllers
             await _productBAL.UpdateProduct(product);
             return Ok();
         }
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
-        { 
-            await _productBAL.DeleteProduct(id);
-            return Ok();
-        }
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> DeleteProduct(int id)
+        //{ 
+        //    await _productBAL.DeleteProduct(id);
+        //    return Ok();
+        //}
         [HttpGet("approval")]
         public async Task<IActionResult> GetApprovalQueue()
         { 
@@ -50,10 +50,48 @@ namespace DotNetCore_WebAPI.Controllers
             return Ok(queue);
         }
         [HttpPost("approval/{id}/approve")]
-        public async Task<IActionResult> ApproveProduct(int id)
+        public async Task<IActionResult> ApproveProduct(int id, [FromQuery] bool isApproved)
         { 
-            await _approvalQueueBAL.ApproveProduct(id);
+            await _approvalQueueBAL.ApproveProduct(id,isApproved);
             return Ok();
         }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> ProductSearch(
+            [FromQuery] string? name,
+            [FromQuery] decimal? minPrice,
+            [FromQuery] decimal? maxPrice,
+            [FromQuery] DateTime? startDate,
+            [FromQuery] DateTime? endDate)
+        {
+            var products = await _productBAL.SearchProducts(name, minPrice, maxPrice, startDate, endDate);
+            return Ok(products);
+        }
+
+        // API to request product deletion (pushes to approval queue)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RequestProductDeletion(int id)
+        {
+            await _productBAL.RequestProductDeletion(id);
+            return Ok("Product deletion request submitted for approval.");
+        }
+
+        // API to approve product deletion
+        [HttpPost("approval/{id}/approve-deletion")]
+        public async Task<IActionResult> ApproveProductDeletion(int id)
+        {
+            await _productBAL.ApproveProductDeletion(id);
+            return Ok("Product deletion approved and product removed.");
+        }
+
+        // API to reject product deletion
+        [HttpPost("approval/{id}/reject-deletion")]
+        public async Task<IActionResult> RejectProductDeletion(int id)
+        {
+            await _productBAL.RejectProductDeletion(id);
+            return Ok("Product deletion rejected and product restored.");
+        }
+
+
     }
 }

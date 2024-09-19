@@ -9,6 +9,7 @@ C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\D
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.AssemblyInfo.cs
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.csproj.CoreCompileInputs.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.sourcelink.json
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.csproj.Up2Date
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.dll
 C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\refint\DAL.dll

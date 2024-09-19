@@ -84,22 +84,77 @@ namespace BAL
             }
             return retVal;
         }
-        public async Task<string> DeleteProduct(int id)
+        //public async Task<string> DeleteProduct(int id)
+        //{
+        //    string retVal = string.Empty;
+        //    try
+        //    {
+        //        var product = _productDAL.GetProductById(id);
+        //        if (product == null) return "Product not found";
+
+        //        retVal = await _productDAL.DeleteProduct(id);
+        //    }
+        //    catch (Exception ex)
+        //    {
+
+        //        throw ex;
+        //    }
+        //    return retVal;
+        //}
+
+        public Task<List<ProductObj>> SearchProducts(string? name, decimal? minPrice, decimal? maxPrice, DateTime? startDate, DateTime? endDate)
         {
-            string retVal = string.Empty;
             try
             {
-                var product = _productDAL.GetProductById(id);
-                if (product == null) return "Product not found";
-                retVal = await _productDAL.DeleteProduct(id);
+                return _productDAL.SearchProducts(name,minPrice,maxPrice,startDate,endDate);
             }
             catch (Exception ex)
             {
 
                 throw ex;
             }
-            return retVal;
         }
+
+        public async Task<string> RequestProductDeletion(int productId) {
+            try
+            {
+                return await _productDAL.RequestProductDeletion(productId);   
+            }
+            catch (Exception ex) 
+            {
+
+                throw ex;
+            }
+        }
+        public async Task<string> ApproveProductDeletion(int productId)
+        {
+            try
+            {
+                return await _productDAL.ApproveProductDeletion(productId);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+        public async Task<string> RejectProductDeletion(int productId)
+        {
+            try
+            {
+                return await _productDAL.RejectProductDeletion(productId);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+
+        }
+
+
+
 
 
     }

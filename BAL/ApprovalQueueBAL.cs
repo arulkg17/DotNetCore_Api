@@ -43,11 +43,11 @@ namespace BAL
             }
             
         }
-        public async Task<int> ApproveProduct(int approvalId)
+        public async Task<string> ApproveProduct(int approvalId, bool isApproved)
         {
             try
             {
-                return await _approvalQueueDAL.ApproveProduct(approvalId);
+                return await _approvalQueueDAL.ApproveProduct(approvalId,isApproved);
             }
             catch (Exception ex)
             {
