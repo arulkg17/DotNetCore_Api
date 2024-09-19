@@ -1,0 +1,17 @@
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\bin\Debug\net8.0\DAL.deps.json
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\bin\Debug\net8.0\DAL.runtimeconfig.json
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\bin\Debug\net8.0\DAL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\bin\Debug\net8.0\DAL.pdb
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\bin\Debug\net8.0\BOL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\bin\Debug\net8.0\BOL.pdb
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.csproj.AssemblyReference.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.AssemblyInfoInputs.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.AssemblyInfo.cs
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.csproj.CoreCompileInputs.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.csproj.Up2Date
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\refint\DAL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.pdb
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\DAL.genruntimeconfig.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\DAL\obj\Debug\net8.0\ref\DAL.dll

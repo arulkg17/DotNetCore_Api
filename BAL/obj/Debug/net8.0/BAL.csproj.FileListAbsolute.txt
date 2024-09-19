@@ -1,0 +1,17 @@
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\bin\Debug\net8.0\BAL.deps.json
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\bin\Debug\net8.0\BAL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\bin\Debug\net8.0\BAL.pdb
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\bin\Debug\net8.0\BOL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\bin\Debug\net8.0\DAL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\bin\Debug\net8.0\BOL.pdb
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\bin\Debug\net8.0\DAL.pdb
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\BAL.csproj.AssemblyReference.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\BAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\BAL.AssemblyInfoInputs.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\BAL.AssemblyInfo.cs
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\BAL.csproj.CoreCompileInputs.cache
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\BAL.csproj.Up2Date
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\BAL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\refint\BAL.dll
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\BAL.pdb
+C:\Core\DotNetCoreChallenge_Product\Arul_DotNet_Core_Cjallenge_Products_WebAPI\BAL\obj\Debug\net8.0\ref\BAL.dll
