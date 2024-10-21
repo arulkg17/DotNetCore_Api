@@ -1,10 +1,5 @@
 ﻿using BOL;
 using DAL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BAL
 {
@@ -21,68 +16,62 @@ namespace BAL
 
         public async Task<List<ProductObj>> GetActiveProducts()
         {
+            List<ProductObj> products = new List<ProductObj>();
             try
             {
-                return await _productDAL.GetActiveProducts();
+                products =  await _productDAL.GetActiveProducts();
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                throw new Exception(ex.Message); ;
             }
-            
+            return products;
         }
-        public async Task<string> AddProduct(ProductObj product)
+        public async Task<ProductObj> AddProduct(ProductObj product)
         {
-            string retVal = string.Empty;
+            ProductObj obj = new ProductObj();
             try
             {
                 if (product.Price > 10000)
-                    retVal= "Product price cannot exceed $10,000.";
-                {
-                    ProductObj obj = await _productDAL.AddProduct(product);
-                    retVal= "Product has been added successfully!";
+                    throw new Exception("Product price cannot exceed $10,000.");
 
-                    if (product.Price > 5000)
-                    {
-                        // Add to approval queue
-                        await _approvalQueueDAL.AddApprovalQueue(product, ApprovalReason.PriceAboveLimit);
-                        retVal= "Product has been added to Approval Queue!";
-                    }
+                obj = await _productDAL.AddProduct(product);
+
+                if (product.Price > 5000)
+                {
+                    // Add to approval queue
+                    await _approvalQueueDAL.AddApprovalQueue(product, ApprovalReason.PriceAboveLimit);
                 }
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                throw new Exception(ex.Message); ;
             }
-            return retVal;
+            return obj;
         }
-        public async Task<string> UpdateProduct(ProductObj product)
+        public async Task<ProductObj> UpdateProduct(ProductObj product)
         {
-            string retVal = string.Empty;
+            ProductObj productObj = new ProductObj();
             try
             {
                 var existingProduct = await _productDAL.GetProductById(product.Id);
                 if (existingProduct == null)
-                    retVal= "Product not found.";
+                    throw new Exception("Product not found.");
 
                 if (product.Price > 5000 || product.Price > (existingProduct.Price * 1.5m))
                 {
                     // Add to approval queue
-                    await _approvalQueueDAL.AddApprovalQueue(product, ApprovalReason.PriceIncreaseAboveThreshold);
-                    retVal= "Product has been added to Approval Queue!";
+                   await _approvalQueueDAL.AddApprovalQueue(product, ApprovalReason.PriceIncreaseAboveThreshold);
                 }
 
-                await _productDAL.UpdateProduct(product);
-                retVal = "Product bas been updated successfuylly!";
+                productObj = await _productDAL.UpdateProduct(product);
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new Exception(ex.Message);
             }
-            return retVal;
+            return productObj;
         }
         //public async Task<string> DeleteProduct(int id)
         //{
@@ -102,55 +91,61 @@ namespace BAL
         //    return retVal;
         //}
 
-        public Task<List<ProductObj>> SearchProducts(string? name, decimal? minPrice, decimal? maxPrice, DateTime? startDate, DateTime? endDate)
+        public async Task<List<ProductObj>> SearchProducts(string? name, decimal? minPrice, decimal? maxPrice, DateTime? startDate, DateTime? endDate)
         {
+            List<ProductObj> products = new List<ProductObj>();
             try
             {
-                return _productDAL.SearchProducts(name,minPrice,maxPrice,startDate,endDate);
+                products = await _productDAL.SearchProducts(name,minPrice,maxPrice,startDate,endDate);
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new Exception(ex.Message);
             }
+            return products;
         }
 
         public async Task<string> RequestProductDeletion(int productId) {
+            string retVal = string.Empty;
             try
             {
-                return await _productDAL.RequestProductDeletion(productId);   
+                retVal = await _productDAL.RequestProductDeletion(productId);   
             }
             catch (Exception ex) 
             {
 
-                throw ex;
+                throw new Exception(ex.Message);
             }
+            return retVal;
         }
         public async Task<string> ApproveProductDeletion(int productId)
         {
+            string retVal = string.Empty;
             try
             {
-                return await _productDAL.ApproveProductDeletion(productId);
+                retVal= await _productDAL.ApproveProductDeletion(productId);
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new Exception(ex.Message);
             }
-
+            return retVal;
         }
         public async Task<string> RejectProductDeletion(int productId)
         {
+            string retVal = string.Empty;
             try
             {
-                return await _productDAL.RejectProductDeletion(productId);
+                retVal =  await _productDAL.RejectProductDeletion(productId);
             }
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new Exception (ex.Message);
             }
-
+            return retVal;
         }
 
 

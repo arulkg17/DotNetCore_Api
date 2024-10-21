@@ -1,8 +1,10 @@
 ﻿using BAL;
 using BOL;
+using DotNetCore_WebAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+
 
 namespace DotNetCore_WebAPI.Controllers
 {
@@ -19,79 +21,187 @@ namespace DotNetCore_WebAPI.Controllers
             _approvalQueueBAL = approvalQueueBAL;
         }
 
-        [HttpGet("active")]
-        public async Task<IActionResult> GetActiveProducts()
+        [HttpGet("activeProducts")]
+        public async Task<ActionResult<StandardResponse<List<ProductObj>>>> GetActiveProducts()
         {
-            var products = await _productBAL.GetActiveProducts();
-            return Ok(products);
+            List<ProductObj> products = new List<ProductObj>();
+            try
+            {
+                products = await _productBAL.GetActiveProducts();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            
+            return new JsonResult(new StandardResponse<IEnumerable<ProductObj>>(true, "Products retrieved successfully", products))
+            { 
+                StatusCode = 200,
+            };
         }
-        [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] ProductObj product)
-        { 
-            await _productBAL.AddProduct(product);
-            return Ok();
-        }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductObj product)
+        [HttpPost("create")]
+        public async Task<ActionResult<StandardResponse<ProductObj>>> CreateProduct([FromBody] ProductObj product)
         {
-            await _productBAL.UpdateProduct(product);
-            return Ok();
+            ProductObj productObj = new ProductObj();
+            try
+            {
+                 productObj = await _productBAL.AddProduct(product);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return new JsonResult(new StandardResponse<ProductObj>(true, "Product added successfully", productObj)) { 
+            StatusCode = 201
+            };
         }
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteProduct(int id)
-        //{ 
-        //    await _productBAL.DeleteProduct(id);
-        //    return Ok();
-        //}
-        [HttpGet("approval")]
-        public async Task<IActionResult> GetApprovalQueue()
-        { 
-            var queue = await _approvalQueueBAL.GetApprovalQueues();
-            return Ok(queue);
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult<StandardResponse<ProductObj>>> UpdateProduct(int id, [FromBody] ProductObj product)
+        {
+            ProductObj productObj = new ProductObj();
+            try
+            {
+                product.Id = id;
+                productObj = await _productBAL.UpdateProduct(product);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return new JsonResult(new StandardResponse<ProductObj>(true, "Product updated successfully", productObj))
+            {
+                StatusCode = 200
+            };
+           
+        }
+
+        [HttpGet("approvals")]
+        public async Task<ActionResult<StandardResponse<List<ApprovalQueueObj>>>> GetApprovalQueue()
+        {
+            List<ApprovalQueueObj> approvalQueues = new List<ApprovalQueueObj>();
+            try
+            {
+                approvalQueues = await _approvalQueueBAL.GetApprovalQueues();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return new JsonResult(new StandardResponse<IEnumerable<ApprovalQueueObj>>(true, "Approvals queues retrieved successfully", approvalQueues))
+            { 
+                StatusCode = 200
+            };
         }
         [HttpPost("approval/{id}/approve")]
-        public async Task<IActionResult> ApproveProduct(int id, [FromQuery] bool isApproved)
-        { 
-            await _approvalQueueBAL.ApproveProduct(id,isApproved);
-            return Ok();
+        public async Task<ActionResult<StandardResponse<string>>> ApproveProduct(int id, [FromQuery] bool isApproved)
+        {
+           string retVal = string.Empty;
+            try
+            {
+                retVal = await _approvalQueueBAL.ApproveProduct(id, isApproved);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+
+            return new JsonResult(new StandardResponse<string>(true, retVal, ""))
+            {
+                StatusCode = 200
+            };
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> ProductSearch(
+        public async Task<ActionResult<StandardResponse<List<ProductObj>>>> ProductSearch(
             [FromQuery] string? name,
             [FromQuery] decimal? minPrice,
             [FromQuery] decimal? maxPrice,
             [FromQuery] DateTime? startDate,
             [FromQuery] DateTime? endDate)
         {
-            var products = await _productBAL.SearchProducts(name, minPrice, maxPrice, startDate, endDate);
-            return Ok(products);
+            List<ProductObj> searchResult = new List<ProductObj>();
+            try
+            {
+                searchResult = await _productBAL.SearchProducts(name, minPrice, maxPrice, startDate, endDate);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+            return new JsonResult(new StandardResponse<List<ProductObj>>(true, "Records retrieved successfully!", searchResult))
+            {
+                StatusCode = 200
+            };
         }
 
         // API to request product deletion (pushes to approval queue)
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> RequestProductDeletion(int id)
+        [HttpDelete("approval/{id}/request-deletion")]
+        public async Task<ActionResult<StandardResponse<string>>> RequestProductDeletion(int id)
         {
-            await _productBAL.RequestProductDeletion(id);
-            return Ok("Product deletion request submitted for approval.");
+            string retVal = string.Empty;
+            try
+            {
+              retVal = await _productBAL.RequestProductDeletion(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception( ex.Message);
+            }
+
+            return new JsonResult(new StandardResponse<string>(true, retVal, ""))
+            {
+                StatusCode = 200
+            };
         }
 
         // API to approve product deletion
         [HttpPost("approval/{id}/approve-deletion")]
-        public async Task<IActionResult> ApproveProductDeletion(int id)
+        public async Task<ActionResult<StandardResponse<string>>> ApproveProductDeletion(int id)
         {
-            await _productBAL.ApproveProductDeletion(id);
-            return Ok("Product deletion approved and product removed.");
+            string retVal = string.Empty;
+            try
+            {
+                retVal = await _productBAL.ApproveProductDeletion(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
+            return new JsonResult(new StandardResponse<string>(true, retVal, ""))
+            {
+                StatusCode = 200
+            };
+
         }
 
         // API to reject product deletion
         [HttpPost("approval/{id}/reject-deletion")]
-        public async Task<IActionResult> RejectProductDeletion(int id)
+        public async Task<ActionResult<StandardResponse<string>>> RejectProductDeletion(int id)
         {
-            await _productBAL.RejectProductDeletion(id);
-            return Ok("Product deletion rejected and product restored.");
-        }
+            string retVal = string.Empty;
+            try
+            {
+                retVal = await _productBAL.RejectProductDeletion(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
+            return new JsonResult(new StandardResponse<string>(true, retVal, ""))
+            {
+                StatusCode = 200
+            };
+
+        }
 
     }
 }

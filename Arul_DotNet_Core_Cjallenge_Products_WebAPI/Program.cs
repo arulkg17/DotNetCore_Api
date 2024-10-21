@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using DAL;
 using BAL;
+using Newtonsoft;
 
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -14,7 +16,10 @@ builder.Services.AddScoped<IProductDAL,ProductDAL>();
 builder.Services.AddScoped<IApprovalQueueBAL, ApprovalQueueBAL>();
 builder.Services.AddScoped<IApprovalQueueDAL, ApprovalQueueDAL>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(options => { 
+    options.SerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -27,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+// Register middleware for exception handling
+app.UseMiddleware<DotNetCore_WebAPI.Middlewares.ExceptionMiddleware>();
 
 app.UseAuthorization();
 

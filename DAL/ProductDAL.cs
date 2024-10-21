@@ -1,12 +1,5 @@
 ﻿using BOL;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -53,14 +46,19 @@ namespace DAL
         {
             try
             {
+                var existingProduct = _context.Products.FirstOrDefault(p => p.Id == product.Id);
+
+                if (existingProduct != null)
+                {
+                    _context.Entry(existingProduct).State = EntityState.Detached; // Detach the entity from being tracked
+                }
+
                 var obj = _context.Products.Update(product);
                 await _context.SaveChangesAsync();
                 return obj.Entity;
-
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }

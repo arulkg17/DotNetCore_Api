@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BOL;
 
 namespace DAL
@@ -19,7 +14,7 @@ namespace DAL
 
         public async Task<int> AddApprovalQueue(ProductObj productObj, ApprovalReason reason)
         {
-            int retVal = 9;
+            int retVal = 0;
             try
             {
                 var approvalRequest = new ApprovalQueueObj
@@ -50,6 +45,13 @@ namespace DAL
                 return await _context.ApprovalQueues
                         .Include(a => a.Product)
                         .OrderBy(a => a.RequestDate)
+                        .Select(aq => new ApprovalQueueObj
+                        {
+                            Id = aq.Id,
+                            Reason = aq.Reason,
+                            RequestDate = aq.RequestDate,
+                            Product = aq.Product
+                        })
                         .ToListAsync();
 
                 //var approvalQueue = await _context.ApprovalQueues
