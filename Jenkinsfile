@@ -11,7 +11,7 @@ pipeline {
             steps {
                  script {
                 echo 'Building project...'
-         def projectPath4= 'https://github.com/arulkg17/DotNetCore_Api.git/Arul_DotNet_Core_Cjallenge_Products_WebAPI/DotNetCore_WebAPI.csproj' 
+         def projectPath4= 'https://github.com/arulkg17/DotNetCore_Api/blob/master/Arul_DotNet_Core_Cjallenge_Products_WebAPI/DotNetCore_WebAPI.csproj' 
 
                 bat "dotnet build ${projectPath4} --configuration Release" // For Windows
                // sh "dotnet build ${projectPath} --configuration Release" // For Linux or macOS
